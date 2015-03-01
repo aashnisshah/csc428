@@ -54,7 +54,7 @@ function draw() {
 /**
  * circle
  */
-function drawCircle(startX, startY, radius, lineWidth) {
+function drawCircle(startX, startY, radius) {
 	context.beginPath();
 	context.arc(startX, startY, radius, 0, 2 * Math.PI, false);
 	context.fillStyle = 'purple';
