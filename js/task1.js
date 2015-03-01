@@ -7,6 +7,7 @@ var offsetX = 430;
 var offsetY = 10;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
+var TOTALPARTS = 5;
 var circle = {
 	"1": {
 		"startX": 380,
@@ -84,7 +85,7 @@ function verifyClick(x, y) {
  */
 addEventListener("click", function(click){
 	if (verifyClick(click.x - offsetX, click.y - offsetY)) {
-		if (PART < 5) {
+		if (PART < TOTALPARTS) {
 			PART = PART + 1;
 		}
 	}
