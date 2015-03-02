@@ -3,8 +3,13 @@ var context;
 var canvas;
 var HEIGHT = document.body.clientHeight;
 var WIDTH = document.body.clientHeight;
+var offsetX = 430;
+var offsetY = 10;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
+var TOTALPARTS = 2;
+var TRACK = false;
+var ATTEMPT = 1;
 
 var circle = {
 	"1": {
@@ -19,13 +24,24 @@ var circle = {
 			"radius": 20,
 		},
 	},
+	"2": {
+		"left": {
+			"startX": 250,
+			"startY": 250,
+			"radius": 20,
+		},
+		"right": {
+			"startX": 600,
+			"startY": 250,
+			"radius": 20,
+		},
+	},
 }
 
 window.onload = function() {};
 
 /* global variables */
 function initializeGlobalVariables() {
-	console.log('create global variables');
 }
 
 
@@ -70,6 +86,52 @@ function drawStraightLine(startX, startY, endX, endY, lineWidth) {
 }
 
 /*
+ * verifyClick
+ * Used to verify if the click happened within the circle
+ */
+function verifyClick(x, y, circle) {
+	if(
+		x >= circle.startX - circle.radius &&
+		x <= circle.startX + circle.radius &&
+		y >= circle.startY - circle.radius &&
+		y <= circle.startY + circle.radius 
+	) {
+		return true;
+	}
+}
+
+/**
+ * Event Listeners
+ */
+addEventListener("mousedown", function(click){
+	console.log(click);
+	if (verifyClick(click.x - offsetX, click.y - offsetY, circle[PART].left)) {
+		console.log('Start tracking information: Task 2, Part ' + PART + ', Attempt ' + ATTEMPT);
+		TRACK = true;
+	}
+}, false);
+
+addEventListener("mouseup", function(click){
+	if (verifyClick(click.x - offsetX, click.y - offsetY, circle[PART].right)) {
+		console.log('Stop tracking information: Task 2, Part ' + PART + ' completed in ' + ATTEMPT + ' attempt[s].');
+		ATTEMPT = 1;
+		if (PART < TOTALPARTS) {
+			PART = PART + 1;
+		}
+	} else {
+		console.log('Stop tracking information: Task 2, Part ' + PART + ', Attempt ' + ATTEMPT + ' failed.');
+		ATTEMPT = ATTEMPT + 1;
+	}
+	TRACK = false;
+}, false);
+
+addEventListener("mousemove", function(click){
+	if (TRACK) {
+		console.log('Timestamp: ' + click.timeStamp + ': x:' + click.x + ', y:' + click.y);
+	}
+}, false);
+
+/*
  * Setup
  */
 function setup() {
@@ -78,10 +140,6 @@ function setup() {
 	context = canvas.getContext("2d");
 	canvas.width = WIDTH;
 	canvas.height = HEIGHT;
-
-	console.log(canvas);
-	console.log(canvas.WIDTH);
-	console.log(canvas.HEIGHT);
 
 	var background = new Image();
 	background.src = backgroundImage;
