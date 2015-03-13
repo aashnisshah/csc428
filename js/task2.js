@@ -7,7 +7,7 @@ var offsetX = 0;
 var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
-var TOTALPARTS = 2;
+var TOTALPARTS = 5;
 var TRACK = false;
 var ATTEMPT = 1;
 
@@ -28,6 +28,42 @@ var circle = {
 		"left": {
 			"startX": 250,
 			"startY": 250,
+			"radius": 20,
+		},
+		"right": {
+			"startX": 600,
+			"startY": 250,
+			"radius": 20,
+		},
+	},
+	"3": {
+		"left": {
+			"startX": 100,
+			"startY": 140,
+			"radius": 20,
+		},
+		"right": {
+			"startX": 300,
+			"startY": 250,
+			"radius": 20,
+		},
+	},
+	"4": {
+		"left": {
+			"startX": 400,
+			"startY": 440,
+			"radius": 20,
+		},
+		"right": {
+			"startX": 600,
+			"startY": 150,
+			"radius": 20,
+		},
+	},
+	"5": {
+		"left": {
+			"startX": 100,
+			"startY": 140,
 			"radius": 20,
 		},
 		"right": {
@@ -112,7 +148,7 @@ addEventListener("mousedown", function(click){
 }, false);
 
 addEventListener("mouseup", function(click){
-	if (verifyClick(click.x - offsetX, click.y - offsetY, circle[PART].right)) {
+	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART].right)) {
 		console.log('Stop tracking information: Task 2, Part ' + PART + ' completed in ' + ATTEMPT + ' attempt[s].');
 		ATTEMPT = 1;
 		if (PART < TOTALPARTS) {
