@@ -15,23 +15,23 @@ var circle = {
 		"radius": 200,
 	},
 	"2": {
-		"startX": 380,
-		"startY": 380,
+		"startX": 180,
+		"startY": 180,
 		"radius": 100,
 	},
 	"3": {
-		"startX": 380,
-		"startY": 380,
+		"startX": 450,
+		"startY": 450,
 		"radius": 50,
 	},
 	"4": {
-		"startX": 380,
-		"startY": 380,
+		"startX": 200,
+		"startY": 200,
 		"radius": 20,
 	},
 	"5": {
-		"startX": 380,
-		"startY": 380,
+		"startX": 275,
+		"startY": 400,
 		"radius": 10,
 	},
 }
