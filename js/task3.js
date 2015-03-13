@@ -191,7 +191,7 @@ function drawCircle(startX, startY, radius) {
 	context.fillStyle = 'purple';
 	context.fill();
 	context.lineWidth = 1;
-	context.strokeStyle = '#e4e4e4';
+	context.strokeStyle = '#000000';
 	context.stroke();
 	context.font="10px verdana";
 }
