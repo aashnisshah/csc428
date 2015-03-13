@@ -10,6 +10,7 @@ var PART = 1;
 var TOTALPARTS = 5;
 var TRACK = false;
 var ATTEMPT = 1;
+var NEXTTASK = false;
 
 var circle = {
 	"1": {
@@ -86,17 +87,22 @@ function initializeGlobalVariables() {
  */
 function draw() {
 	resetScreen();
-	drawStraightLine(
-		circle[PART].left.startX,
-		circle[PART].left.startY,
-		circle[PART].right.startX,
-		circle[PART].right.startY,
-		5
-	);
-	drawCircle(circle[PART].left.startX, circle[PART].left.startY, circle[PART].left.radius);
-	drawCircle(circle[PART].right.startX, circle[PART].right.startY, circle[PART].right.radius);
-	context.strokeText('start', circle[PART].left.startX - 20, circle[PART].left.startY - 30);
-	context.strokeText('end', circle[PART].right.startX - 20, circle[PART].right.startY - 30);
+	if(!NEXTTASK) {
+		drawStraightLine(
+			circle[PART].left.startX,
+			circle[PART].left.startY,
+			circle[PART].right.startX,
+			circle[PART].right.startY,
+			5
+		);
+		drawCircle(circle[PART].left.startX, circle[PART].left.startY, circle[PART].left.radius);
+		drawCircle(circle[PART].right.startX, circle[PART].right.startY, circle[PART].right.radius);
+		context.strokeText('start', circle[PART].left.startX - 20, circle[PART].left.startY - 30);
+		context.strokeText('end', circle[PART].right.startX - 20, circle[PART].right.startY - 30);
+	} else {
+		context.font="36px verdana";
+		context.strokeText('Click to continue to the next round', 150, 300);
+	}
 }
 
 /**
@@ -152,11 +158,16 @@ addEventListener("mousedown", function(click){
 }, false);
 
 addEventListener("mouseup", function(click){
+	if(NEXTTASK) {
+		nextTask();
+	}
 	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART].right)) {
 		console.log('Stop tracking information: Task 2, Part ' + PART + ' completed in ' + ATTEMPT + ' attempt[s].');
 		ATTEMPT = 1;
 		if (PART < TOTALPARTS) {
 			PART = PART + 1;
+		} else {
+			NEXTTASK = true;
 		}
 	} else {
 		console.log('Stop tracking information: Task 2, Part ' + PART + ', Attempt ' + ATTEMPT + ' failed.');
@@ -170,6 +181,13 @@ addEventListener("mousemove", function(click){
 		console.log('Timestamp: ' + click.timeStamp + ': x:' + click.layerX + ', y:' + click.layerY);
 	}
 }, false);
+
+/**
+ * Continue to next task
+ */
+function nextTask() {
+	window.location.href = "../views/task3.html";
+}
 
 /*
  * Setup

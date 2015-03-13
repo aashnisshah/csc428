@@ -9,6 +9,7 @@ var backgroundImage = "../img/background/task1.png";
 var PART = 1;
 var TOTALPARTS = 5;
 var ATTEMPT = 1;
+var NEXTTASK = false;
 var circle = {
 	"1": {
 		"startX": 380,
@@ -50,7 +51,12 @@ function initializeGlobalVariables() {
  */
 function draw() {
 	resetScreen();
-	drawCircle(circle[PART].startX, circle[PART].startY, circle[PART].radius);
+	if(!NEXTTASK) {
+		drawCircle(circle[PART].startX, circle[PART].startY, circle[PART].radius);
+	} else {
+		context.font="36px verdana";
+		context.strokeText('Click to continue to the next round', 150, 300);
+	}
 }
 
 /**
@@ -86,16 +92,28 @@ function verifyClick(x, y) {
  */
 addEventListener("click", function(click){
 	console.log('Start tracking information: Task 1, Part ' + PART + ', Attempt ' + ATTEMPT);
+	if(NEXTTASK) {
+		nextTask();
+	}
 	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY)) {
 		if (PART < TOTALPARTS) {
 			PART = PART + 1;
 			ATTEMPT = 1;
 			console.log('Timestamp: ' + click.timeStamp + ': x:' + click.layerX + ', y:' + click.layerY);
+		} else {
+			NEXTTASK = true;
 		}
 	} else {
 		ATTEMPT = ATTEMPT + 1;
 	}
 }, false);
+
+/**
+ * Continue to next task
+ */
+function nextTask() {
+	window.location.href = "../views/task2.html";
+}
 
 /**
  * Setup
