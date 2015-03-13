@@ -95,6 +95,8 @@ function draw() {
 	);
 	drawCircle(circle[PART].left.startX, circle[PART].left.startY, circle[PART].left.radius);
 	drawCircle(circle[PART].right.startX, circle[PART].right.startY, circle[PART].right.radius);
+	context.strokeText('start', circle[PART].left.startX - 20, circle[PART].left.startY - 30);
+	context.strokeText('end', circle[PART].right.startX - 20, circle[PART].right.startY - 30);
 }
 
 /**
@@ -118,7 +120,9 @@ function drawStraightLine(startX, startY, endX, endY, lineWidth) {
 	context.moveTo(startX, startY);
 	context.lineTo(endX, endY);
 	context.lineWidth = lineWidth;
+	context.strokeStyle = '#000000';
 	context.stroke();
+	context.font="20px verdana";
 }
 
 /*
