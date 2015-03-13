@@ -3,8 +3,8 @@ var context;
 var canvas;
 var HEIGHT = document.body.clientHeight;
 var WIDTH = document.body.clientHeight;
-var offsetX = 430;
-var offsetY = 10;
+var offsetX = 0;
+var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
 var TOTALPARTS = 5;
@@ -84,7 +84,7 @@ function verifyClick(x, y) {
  * Event Listeners
  */
 addEventListener("click", function(click){
-	if (verifyClick(click.x - offsetX, click.y - offsetY)) {
+	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY)) {
 		if (PART < TOTALPARTS) {
 			PART = PART + 1;
 		}

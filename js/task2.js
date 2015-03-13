@@ -3,8 +3,8 @@ var context;
 var canvas;
 var HEIGHT = document.body.clientHeight;
 var WIDTH = document.body.clientHeight;
-var offsetX = 430;
-var offsetY = 10;
+var offsetX = 0;
+var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
 var TOTALPARTS = 2;
@@ -105,7 +105,7 @@ function verifyClick(x, y, circle) {
  */
 addEventListener("mousedown", function(click){
 	console.log(click);
-	if (verifyClick(click.x - offsetX, click.y - offsetY, circle[PART].left)) {
+	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART].left)) {
 		console.log('Start tracking information: Task 2, Part ' + PART + ', Attempt ' + ATTEMPT);
 		TRACK = true;
 	}
