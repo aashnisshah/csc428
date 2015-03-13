@@ -167,7 +167,7 @@ addEventListener("mouseup", function(click){
 
 addEventListener("mousemove", function(click){
 	if (TRACK) {
-		console.log('Timestamp: ' + click.timeStamp + ': x:' + click.x + ', y:' + click.y);
+		console.log('Timestamp: ' + click.timeStamp + ': x:' + click.layerX + ', y:' + click.layerY);
 	}
 }, false);
 
