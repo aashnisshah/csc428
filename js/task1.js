@@ -8,6 +8,7 @@ var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
 var TOTALPARTS = 5;
+var ATTEMPT = 1;
 var circle = {
 	"1": {
 		"startX": 380,
@@ -84,10 +85,15 @@ function verifyClick(x, y) {
  * Event Listeners
  */
 addEventListener("click", function(click){
+	console.log('Start tracking information: Task 1, Part ' + PART + ', Attempt ' + ATTEMPT);
 	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY)) {
 		if (PART < TOTALPARTS) {
 			PART = PART + 1;
+			ATTEMPT = 1;
+			console.log('Timestamp: ' + click.timeStamp + ': x:' + click.layerX + ', y:' + click.layerY);
 		}
+	} else {
+		ATTEMPT = ATTEMPT + 1;
 	}
 }, false);
 
