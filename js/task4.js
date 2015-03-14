@@ -7,7 +7,7 @@ var offsetX = 0;
 var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
-var TOTALPARTS = 1;
+var TOTALPARTS = 3;
 var TRACK = false;
 var ATTEMPT = 1;
 var NEXTTASK = false;
@@ -20,6 +20,27 @@ var circle = {
 		"endY": 250,
 		"size": 120,
 
+	},
+	"2": {
+		"circleX": 300,
+		"circleY": 300,
+		"startX": 300,
+		"startY": 250,
+		"endX": 300,
+		"endY": 250,
+		"size": 120,
+		"radius": 50,
+
+	},
+	"3": {
+		"circleX": 300,
+		"circleY": 300,
+		"startX": 300,
+		"startY": 150,
+		"endX": 300,
+		"endY": 150,
+		"size": 120,
+		"radius": 150,
 	},
 	
 }
@@ -38,14 +59,26 @@ function draw() {
 	resetScreen();
 
 	if(!NEXTTASK) {
-		drawSemiCircle(circle[PART].startY, circle[PART].size);
-		drawCircle(circle[PART].startX, circle[PART].startY, 10);
-		drawCircle(circle[PART].endX, circle[PART].endY, 10);
-		context.font="18px verdana";
-		context.strokeText('start', circle[PART].startX - 20, circle[PART].startY + 30);
-		context.strokeText('end', circle[PART].endX - 20, circle[PART].endY + 30);
+		if(PART === 1) {
+			drawSemiCircle(circle[PART].startY, circle[PART].size);
+			drawCircle(circle[PART].startX, circle[PART].startY, 10, 'purple', 1);
+			drawCircle(circle[PART].endX, circle[PART].endY, 10, 'purple', 1);
+			context.font="18px verdana";
+			context.strokeText('Start', circle[PART].circleX - 20, circle[PART].circleY + 30);
+			context.strokeText('End', circle[PART].endX - 20, circle[PART].endY + 30);
+		} else {
+			drawCircle(circle[PART].circleX, circle[PART].circleY, circle[PART].radius, 'white', 3); // main circle
+			drawCircle(
+				circle[PART].circleX,
+				circle[PART].startY,
+				10,
+				'purple',
+				1); // start
+			context.font="18px verdana";
+			context.strokeText('Go Clockwise', circle[PART].startX - 45, circle[PART].startY + 60);
+		}
 	} else {
-		context.strokeText('Click to continue to the next round', 150, 300);
+		context.strokeText('Click to go to the final page.', 150, 300);
 	}
 }
 
@@ -63,12 +96,12 @@ function drawSemiCircle(startY, size) {
 /**
  * circle
  */
-function drawCircle(startX, startY, radius) {
+function drawCircle(startX, startY, radius, fill, lineWidth) {
 	context.beginPath();
 	context.arc(startX, startY, radius, 0, 2 * Math.PI, false);
-	context.fillStyle = 'purple';
+	context.fillStyle = fill;
 	context.fill();
-	context.lineWidth = 1;
+	context.lineWidth = lineWidth;
 	context.strokeStyle = '#000000';
 	context.stroke();
 	context.font="10px verdana";
