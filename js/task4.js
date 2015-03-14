@@ -38,11 +38,13 @@ function draw() {
 	resetScreen();
 
 	if(!NEXTTASK) {
-		drawSemiCircle();
+		drawSemiCircle(circle[PART].startY, circle[PART].size);
 		drawCircle(circle[PART].startX, circle[PART].startY, 10);
 		drawCircle(circle[PART].endX, circle[PART].endY, 10);
+		context.font="18px verdana";
+		context.strokeText('start', circle[PART].startX - 20, circle[PART].startY + 30);
+		context.strokeText('end', circle[PART].endX - 20, circle[PART].endY + 30);
 	} else {
-		context.font="36px verdana";
 		context.strokeText('Click to continue to the next round', 150, 300);
 	}
 }
@@ -50,9 +52,9 @@ function draw() {
 /**
  * Draw a Semi Circle
  */
-function drawSemiCircle() {
+function drawSemiCircle(startY, size) {
 	context.beginPath();
-	context.arc(288, circle[PART].startY, circle[PART].size, 0, Math.PI, true);
+	context.arc(288, startY, size, 0, Math.PI, true);
 	context.lineWidth = 5;
 	context.strokeStyle = '#000000';
 	context.stroke();
@@ -156,6 +158,7 @@ function setup() {
 	var background = new Image();
 	background.src = backgroundImage;
 	context.drawImage(background, 0, 0);
+	context.font="36px verdana";
 }
 
 /*
