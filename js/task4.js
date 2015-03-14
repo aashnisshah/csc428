@@ -7,146 +7,19 @@ var offsetX = 0;
 var offsetY = 0;
 var backgroundImage = "../img/background/task1.png";
 var PART = 1;
-var TOTALPARTS = 4;
+var TOTALPARTS = 1;
 var TRACK = false;
 var ATTEMPT = 1;
 var NEXTTASK = false;
 
 var circle = {
 	"1": {
-		"parts": 4,
-		"first": 1,
-		"last": 1,
-		"1": {
-			"startX": 350,
-			"startY": 250,
-			"radius": 10,
-		},
-		"2": {
-			"startX": 550,
-			"startY": 250,
-			"radius": 10,
-		},
-		"3": {
-			"startX": 550,
-			"startY": 450,
-			"radius": 10,
-		},
-		"4": {
-			"startX": 350,
-			"startY": 450,
-			"radius": 10,
-		},
-	},
-	"2": {
-		"parts": 4,
-		"first": 1,
-		"last": 1,
-		"1": {
-			"startX": 350,
-			"startY": 250,
-			"radius": 10,
-		},
-		"2": {
-			"startX": 650,
-			"startY": 250,
-			"radius": 10,
-		},
-		"3": {
-			"startX": 550,
-			"startY": 450,
-			"radius": 10,
-		},
-		"4": {
-			"startX": 250,
-			"startY": 450,
-			"radius": 10,
-		},
-	},
-	"3": {
-		"parts": 5,
-		"first": 1,
-		"last": 1,
-		"1": {
-			"startX": 250,
-			"startY": 550,
-			"radius": 10,
-		},
-		"2": {
-			"startX": 400,
-			"startY": 250,
-			"radius": 10,
-		},
-		"3": {
-			"startX": 550,
-			"startY": 550,
-			"radius": 10,
-		},
-		"4": {
-			"startX": 250,
-			"startY": 350,
-			"radius": 10,
-		},
-		"5": {
-			"startX": 550,
-			"startY": 350,
-			"radius": 10,
-		},
-	},
-	"4": {
-		"parts": 10,
-		"first": 1,
-		"last": 1,
-		"1": {
-			"startX": 250,
-			"startY": 550,
-			"radius": 10,
-		},
-		"2": {
-			"startX": 450,
-			"startY": 150,
-			"radius": 10,
-		},
-		"3": {
-			"startX": 550,
-			"startY": 350,
-			"radius": 10,
-		},
-		"4": {
-			"startX": 450,
-			"startY": 450,
-			"radius": 10,
-		},
-		"5": {
-			"startX": 550,
-			"startY": 500,
-			"radius": 10,
-		},
-		"6": {
-			"startX": 350,
-			"startY": 280,
-			"radius": 10,
-		},
-		"7": {
-			"startX": 150,
-			"startY": 150,
-			"radius": 10,
-		},
-		"8": {
-			"startX": 200,
-			"startY": 450,
-			"radius": 10,
-		},
-		"9": {
-			"startX": 430,
-			"startY": 350,
-			"radius": 10,
-		},
-		"10": {
-			"startX": 120,
-			"startY": 200,
-			"radius": 10,
-		},
+		"startX": 167,
+		"startY": 250,
+		"endX": 408,
+		"endY": 250,
+		"size": 120,
+
 	},
 	
 }
@@ -165,26 +38,24 @@ function draw() {
 	resetScreen();
 
 	if(!NEXTTASK) {
-		for(var i = 1; i <= circle[PART].parts; i++) {
-			var start = i;
-			var end = i == circle[PART].parts ? 1 : i + 1;
-			drawStraightLine(
-				circle[PART][start].startX,
-				circle[PART][start].startY,
-				circle[PART][end].startX,
-				circle[PART][end].startY,
-				5
-			);
-			drawCircle(circle[PART][i].startX, circle[PART][i].startY, circle[PART][i].radius);
-	  		context.strokeText('' + i, circle[PART][i].startX - 4, circle[PART][i].startY + 4);
-		}
-
-		drawCircle(circle[PART]["1"].startX, circle[PART]["1"].startY, circle[PART]["1"].radius);
-	  	context.strokeText('1', circle[PART]["1"].startX - 4, circle[PART]["1"].startY + 4);
+		drawSemiCircle();
+		drawCircle(circle[PART].startX, circle[PART].startY, 10);
+		drawCircle(circle[PART].endX, circle[PART].endY, 10);
 	} else {
 		context.font="36px verdana";
 		context.strokeText('Click to continue to the next round', 150, 300);
 	}
+}
+
+/**
+ * Draw a Semi Circle
+ */
+function drawSemiCircle() {
+	context.beginPath();
+	context.arc(288, circle[PART].startY, circle[PART].size, 0, Math.PI, true);
+	context.lineWidth = 5;
+	context.strokeStyle = '#000000';
+	context.stroke();
 }
 
 /**
@@ -218,12 +89,12 @@ function drawStraightLine(startX, startY, endX, endY, lineWidth) {
  * verifyClick
  * Used to verify if the click happened within the circle
  */
-function verifyClick(x, y, circle) {
+function verifyClick(x, y, circleX, circleY) {
 	if(
-		x >= circle.startX - circle.radius &&
-		x <= circle.startX + circle.radius &&
-		y >= circle.startY - circle.radius &&
-		y <= circle.startY + circle.radius 
+		x >= circleX - 10 &&
+		x <= circleX + 10 &&
+		y >= circleY - 10 &&
+		y <= circleY + 10 
 	) {
 		return true;
 	}
@@ -234,7 +105,7 @@ function verifyClick(x, y, circle) {
  */
 addEventListener("mousedown", function(click){
 	console.log(click);
-	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART][circle[PART].first])) {
+	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART].startX, circle[PART].startY)) {
 		console.log('Start tracking information: Task 2, Part ' + PART + ', Attempt ' + ATTEMPT);
 		TRACK = true;
 	}
@@ -244,7 +115,7 @@ addEventListener("mouseup", function(click){
 	if(NEXTTASK) {
 		nextTask();
 	}
-	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART][circle[PART].last])) {
+	if (verifyClick(click.layerX - offsetX, click.layerY - offsetY, circle[PART].endX, circle[PART].endY)) {
 		console.log('Stop tracking information: Task 2, Part ' + PART + ' completed in ' + ATTEMPT + ' attempt[s].');
 		ATTEMPT = 1;
 		if (PART < TOTALPARTS) {
