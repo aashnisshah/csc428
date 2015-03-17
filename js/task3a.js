@@ -269,7 +269,7 @@ addEventListener("mousemove", function(click){
  * Continue to next task
  */
 function nextTask() {
-	window.location.href = "../views/task4.html";
+	window.location.href = "../views/task4a.html";
 }
 
 /*

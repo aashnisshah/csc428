@@ -112,7 +112,7 @@ addEventListener("click", function(click){
  * Continue to next task
  */
 function nextTask() {
-	window.location.href = "../views/task2.html";
+	window.location.href = "../views/task2a.html";
 }
 
 /**

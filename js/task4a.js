@@ -175,7 +175,7 @@ addEventListener("mousemove", function(click){
  * Continue to next task
  */
 function nextTask() {
-	window.location.href = "../index.html";
+	window.location.href = "../views/changeDevice.html";
 }
 
 /*
