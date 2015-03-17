@@ -176,11 +176,15 @@ function draw() {
 				5
 			);
 			drawCircle(circle[PART][i].startX, circle[PART][i].startY, circle[PART][i].radius);
+			context.strokeStyle = "#efefef";
 	  		context.strokeText('' + i, circle[PART][i].startX - 4, circle[PART][i].startY + 4);
+			context.strokeStyle = "#000000";
 		}
 
 		drawCircle(circle[PART]["1"].startX, circle[PART]["1"].startY, circle[PART]["1"].radius);
+		context.strokeStyle = "#efefef";
 	  	context.strokeText('1', circle[PART]["1"].startX - 4, circle[PART]["1"].startY + 4);
+		context.strokeStyle = "#000000";
 	} else {
 		context.font="36px verdana";
 		context.strokeText('Click to continue to the next round', 150, 300);
