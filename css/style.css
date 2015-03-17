@@ -1,3 +1,14 @@
 body {
 	background: #ffffff;
+	margin: 0px auto;
+	text-align: center;
+	width: 80%;
+}
+
+body, p {
+	font-size: 1.8em;
+}
+
+a:link {
+	text-decoration: none;
 }
